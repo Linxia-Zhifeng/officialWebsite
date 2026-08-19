@@ -1,80 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
 
 const activeFilter = ref('all')
 
-const filters = [
-  { key: 'all', label: '全部' },
-  { key: 'manufacturing', label: '制造业' },
-  { key: 'retail', label: '零售业' },
-  { key: 'logistics', label: '物流业' },
-  { key: 'software', label: '软件服务' }
-]
-
-const allCases = [
-  {
-    id: 1,
-    title: '制造业生产管理系统',
-    industry: '制造业',
-    industryKey: 'manufacturing',
-    result: '生产协同效率提升 30%',
-    desc: '为大型制造企业定制开发生产管理系统，实现生产计划、物料管理、质量监控全流程数字化与可视化。',
-    tags: ['MES 系统', '生产看板', '实时数据']
-  },
-  {
-    id: 2,
-    title: '连锁零售会员体系',
-    industry: '零售业',
-    industryKey: 'retail',
-    result: '会员复购率提升 45%',
-    desc: '为连锁零售企业构建全渠道会员体系，打通线上线下会员权益，支持精准营销与个性化服务。',
-    tags: ['CRM 系统', '全渠道整合', '消费分析']
-  },
-  {
-    id: 3,
-    title: '物流调度平台',
-    industry: '物流业',
-    industryKey: 'logistics',
-    result: '配送时效缩短 25%',
-    desc: '为物流企业打造智能调度平台，通过路径优化算法提升调度效率，支持运输过程实时追踪与异常预警。',
-    tags: ['智能调度', '实时追踪', '路径优化']
-  },
-  {
-    id: 4,
-    title: '团队协作 SaaS 工具',
-    industry: '软件服务',
-    industryKey: 'software',
-    result: '团队协作效率提升 50%',
-    desc: '面向企业场景的云端协作工具，集成文档协作、任务管理、即时通讯等能力，降低团队沟通成本。',
-    tags: ['SaaS 产品', '协作办公', '云原生']
-  },
-  {
-    id: 5,
-    title: '电商中台系统',
-    industry: '零售业',
-    industryKey: 'retail',
-    result: '订单处理效率提升 60%',
-    desc: '为电商企业搭建统一业务中台，整合商品、库存、订单、营销等核心模块，支撑业务规模快速增长。',
-    tags: ['中台架构', '高并发处理', '微服务']
-  },
-  {
-    id: 6,
-    title: '供应链金融平台',
-    industry: '软件服务',
-    industryKey: 'software',
-    result: '审批流程缩短 70%',
-    desc: '为金融科技企业开发供应链金融平台，实现授信审批、风控管理、放款流程全线上化与自动化。',
-    tags: ['金融科技', '风控模型', '流程自动化']
-  }
-]
+const filters = computed(() => tm('cases.filters') as any[])
+const allCases = computed(() => tm('cases.detailItems') as any[])
 
 const filteredCases = () => {
-  if (activeFilter.value === 'all') return allCases
-  return allCases.filter(c => c.industryKey === activeFilter.value)
+  if (activeFilter.value === 'all') return allCases.value
+  return allCases.value.filter((c: any) => c.industryKey === activeFilter.value)
 }
 
 // 筛选切换后重新为列表项绑定入场动画

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t, tm } = useI18n()
 
-const steps = tm('process.steps') as string[]
-const stepsCount = steps.length
+const steps = computed(() => tm('process.steps') as string[])
+const stepsCount = computed(() => steps.value.length)
 
 onMounted(() => {
   const targets: Element[] = []

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
 
 const form = ref({
   name: '',
@@ -23,24 +23,7 @@ const submitForm = () => {
   }, 3000)
 }
 
-const faqs = [
-  {
-    q: '做一个项目一般要多长时间？',
-    a: '看活儿多少，简单的一两月搞定，复杂点的三到六个月。需求聊清楚后我们会给个明确的时间表，不瞎忽悠。'
-  },
-  {
-    q: '上线后想加功能还能找你们吗？',
-    a: '当然可以。我们本来就做长期服务的，系统上线后想加新功能、改老功能，随时聊。'
-  },
-  {
-    q: '数据会不会泄露？',
-    a: '该加密的加密，该设权限的设权限，该记日志的记日志。你要是不放心，还可以把代码部署到你自己的服务器上。'
-  },
-  {
-    q: '交付后我们自己不会用咋办？',
-    a: '怕啥，我们会教到你会为止。文字说明、操作视频、线上会议，啥方式顺手就用啥方式。'
-  }
-]
+const faqs = computed(() => tm('contact.faqs') as any[])
 
 const activeFaq = ref<number | null>(null)
 
@@ -99,7 +82,7 @@ onMounted(() => {
       <div class="container">
         <div class="contact-grid">
           <div class="contact-info-panel">
-            <h2>怎么找到我们</h2>
+            <h2>{{ t('contact.infoTitle') }}</h2>
             <div class="info-list">
               <div class="info-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
@@ -133,14 +116,14 @@ onMounted(() => {
             </div>
 
             <div class="business-hours">
-              <h3>我们的上班时间</h3>
-              <p>周一到周五 上午9点到下午6点</p>
-              <p>周六 上午10点到下午4点</p>
+              <h3>{{ t('contact.businessHours.title') }}</h3>
+              <p>{{ t('contact.businessHours.weekday') }}</p>
+              <p>{{ t('contact.businessHours.saturday') }}</p>
             </div>
           </div>
 
           <div class="contact-form-panel">
-            <h2>说下你想做啥</h2>
+            <h2>{{ t('contact.formTitle') }}</h2>
             <form @submit.prevent="submitForm" class="contact-form">
               <div class="form-row">
                 <div class="form-group">
@@ -179,7 +162,7 @@ onMounted(() => {
     <section class="faq section">
       <div class="container">
         <div class="section-title">
-          <h2>你可能想问的</h2>
+          <h2>{{ t('contact.faqsTitle') }}</h2>
         </div>
         <div class="faq-list">
           <div

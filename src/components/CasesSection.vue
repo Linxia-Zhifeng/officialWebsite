@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { observeReveal } from '../composables/useScrollAnimation'
@@ -7,7 +7,7 @@ import { observeReveal } from '../composables/useScrollAnimation'
 const { t, tm } = useI18n()
 const router = useRouter()
 
-const cases = tm('cases.items') as any[]
+const cases = computed(() => tm('cases.items') as any[])
 
 const goCases = () => router.push('/cases')
 

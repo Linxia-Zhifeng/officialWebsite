@@ -1,42 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
 
-const capabilities = [
-  {
-    title: '全栈开发能力',
-    desc: '前端界面、后端服务、移动端应用一体化交付，完整技术栈覆盖，团队内部协作高效。',
-    items: ['Vue / React 前端开发', 'Node / Python 后端服务', 'iOS / Android 原生应用', '微信小程序开发']
-  },
-  {
-    title: '系统架构能力',
-    desc: '根据业务规模设计高可用、可扩展的技术架构，保障系统在访问量增长时的稳定性。',
-    items: ['微服务架构拆分', '云原生部署方案', '分布式系统设计', '高并发场景优化']
-  },
-  {
-    title: '数据分析能力',
-    desc: '构建从数据采集、存储、处理到可视化的完整链路，为业务决策提供有效数据支撑。',
-    items: ['数据仓库搭建', '实时数据处理', '可视化报表呈现', '智能分析建议']
-  },
-  {
-    title: '安全防护能力',
-    desc: '建立身份认证、权限管控、传输加密、漏洞扫描等多层安全防护，保障企业核心数据安全。',
-    items: ['统一身份认证授权', '数据加密传输存储', '漏洞扫描与修复', '操作审计日志记录']
-  },
-  {
-    title: 'DevOps 工程能力',
-    desc: '自动化测试、构建、部署与监控体系，提升交付效率，降低人工操作风险。',
-    items: ['CI/CD 持续交付流水线', '容器化部署管理', '运行监控与告警', '日志采集与分析']
-  },
-  {
-    title: 'UI / UX 设计能力',
-    desc: '从用户使用场景出发，完成界面交互与视觉设计，保证产品体验的易用性与一致性。',
-    items: ['用户研究与分析', '交互流程设计', '视觉风格设计', '可用性测试迭代']
-  }
-]
+const capabilities = computed(() => tm('capabilities.items') as any[])
 
 onMounted(() => {
   const cards = document.querySelectorAll('.cap-card')
@@ -54,8 +23,8 @@ onMounted(() => {
   <main class="capabilities-page">
     <section class="page-header">
       <div class="container">
-        <h1 class="page-title">{{ t('nav.capabilities') }}</h1>
-        <p class="page-subtitle">覆盖多维度的技术能力，为企业数字化项目提供端到端的技术支撑</p>
+        <h1 class="page-title">{{ t('capabilities.title') }}</h1>
+        <p class="page-subtitle">{{ t('capabilities.subtitle') }}</p>
       </div>
     </section>
 

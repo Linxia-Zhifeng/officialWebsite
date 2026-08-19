@@ -1,23 +1,12 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
 
-const timeline = [
-  { year: '2024', title: '慢慢长大', desc: '服务过的企业超过100家，团队也扩展到30多号人了' },
-  { year: '2022', title: '攒了点经验', desc: '做了好几个大系统的重构项目，越来越多客户愿意一直跟我们合作' },
-  { year: '2020', title: '团队凑齐了', desc: '核心成员稳定了，从设计、写代码、测bug到上线维护，啥岗位都有' },
-  { year: '2018', title: '开干了', desc: '林下之风科技成立，就想做点靠谱的软件给企业用' }
-]
-
-const values = [
-  { icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5', title: '沉下心做', desc: '技术慢慢磨，行业慢慢钻，不着急' },
-  { icon: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z', title: '说到做到', desc: '说好什么时候交就什么时候交，有变动提前说' },
-  { icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z', title: '实在做事', desc: '不说虚话，不玩套路，该咋干就咋干' },
-  { icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2', title: '长期搭档', desc: '交完货不跑路，有事随时找得着' }
-]
+const timeline = computed(() => tm('about.timeline') as any[])
+const values = computed(() => tm('about.values') as any[])
 
 onMounted(() => {
   const targets: Element[] = []
@@ -75,7 +64,7 @@ onMounted(() => {
     <section class="values section">
       <div class="container">
         <div class="section-title">
-          <h2>我们怎么做事</h2>
+          <h2>{{ t('about.valuesTitle') }}</h2>
         </div>
         <div class="values-grid">
           <div v-for="(value, index) in values" :key="index" class="value-card">
@@ -94,7 +83,7 @@ onMounted(() => {
     <section class="timeline-section section">
       <div class="container">
         <div class="section-title">
-          <h2>走过来的路</h2>
+          <h2>{{ t('about.timelineTitle') }}</h2>
         </div>
         <div class="timeline">
           <div

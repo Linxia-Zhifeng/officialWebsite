@@ -1,36 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
 
-const services = [
-  {
-    title: '定制化系统开发',
-    desc: '面向企业内部管理或对外业务场景，根据实际流程设计开发，不套用现成模板，确保系统与业务需求匹配。',
-    features: ['需求调研分析', '原型方案设计', '功能开发实现', '部署上线培训'],
-    icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'
-  },
-  {
-    title: 'Web 与移动端开发',
-    desc: '覆盖企业官网、管理后台、微信小程序、移动应用等多端形态，实现统一数据接口与一致的操作体验。',
-    features: ['响应式多端适配', '统一接口数据互通', '性能优化保障流畅', '简洁易用交互设计'],
-    icon: 'M18 20h3v-8h-3v8zM6 20H3v-8h3v8zM9 20h3V8H9v12zM15 20h3V4h-3v16z'
-  },
-  {
-    title: '数字化方案咨询',
-    desc: '协助企业梳理业务流程、识别痛点与优化机会，提供分阶段可落地的数字化规划方案，控制试错成本。',
-    features: ['业务现状诊断', '流程优化分析', '落地路径规划', '技术选型建议'],
-    icon: 'M21 13a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 13a2.25 2.25 0 0 0 2.25 2.25h1.5a3 3 0 1 0 5.5 0h.5a3 3 0 1 0 5.5 0h.5A2.25 2.25 0 0 0 21 13z'
-  },
-  {
-    title: '系统运维与迭代',
-    desc: '针对已上线系统提供持续的运维支持、性能优化、功能扩展与技术重构服务，保障系统伴随业务稳步演进。',
-    features: ['运行监控与排障', '性能调优与加固', '功能扩展与迭代', '技术架构升级'],
-    icon: 'M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8 M21 3v5h-5 M12 7v5l4 2'
-  }
-]
+const services = computed(() => tm('servicesDetail.items') as any[])
 
 onMounted(() => {
   const blocks = document.querySelectorAll('.service-block')

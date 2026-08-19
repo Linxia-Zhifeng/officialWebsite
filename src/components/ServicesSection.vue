@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
@@ -12,7 +12,7 @@ const serviceIcons = [
   'M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8 M21 3v5h-5 M12 7v5l4 2'
 ]
 
-const services = tm('services.items') as any[]
+const services = computed(() => tm('services.items') as any[])
 
 onMounted(() => {
   const cards = document.querySelectorAll('.service-card')

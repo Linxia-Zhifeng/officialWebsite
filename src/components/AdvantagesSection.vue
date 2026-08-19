@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { observeReveal } from '../composables/useScrollAnimation'
 
@@ -12,7 +12,7 @@ const iconPaths: Record<string, string> = {
   companion: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'
 }
 
-const advantages = tm('advantages.items') as any[]
+const advantages = computed(() => tm('advantages.items') as any[])
 
 const getIconPath = (icon: string) => iconPaths[icon] || iconPaths.stability
 
