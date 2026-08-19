@@ -22,14 +22,32 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.process-step').forEach((el, i) => {
-    el.classList.add('reveal-scale');
-    ;(el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
-    observer.value?.observe(el)
+    const dot = el.querySelector('.step-dot');
+    const line = el.querySelector('.step-line');
+    const content = el.querySelector('.step-content');
+    if (dot) {
+      dot.classList.add('reveal-flow');
+      (dot as HTMLElement).style.transitionDelay = `${0.1 + i * 0.1}s`;
+      observer.value?.observe(dot);
+    }
+    if (line) {
+      line.classList.add('reveal-flow-line');
+      (line as HTMLElement).style.transitionDelay = `${0.25 + i * 0.1}s`;
+      observer.value?.observe(line);
+    }
+    if (content) {
+      content.classList.add('reveal-flow');
+      (content as HTMLElement).style.transitionDelay = `${0.4 + i * 0.1}s`;
+      observer.value?.observe(content);
+    }
+    el.classList.add('reveal-flow');
+    (el as HTMLElement).style.transitionDelay = `${i * 0.05}s`;
+    observer.value?.observe(el);
   })
 
   const title = document.querySelector('.process .section-title')
   if (title) {
-    title.classList.add('reveal')
+    title.classList.add('reveal-shine')
     observer.value.observe(title)
   }
 })
@@ -104,7 +122,6 @@ onUnmounted(() => {
 
 .process-step:hover .step-dot {
   background-color: var(--color-primary);
-  transform: scale(1.1);
   box-shadow: 0 0 0 6px var(--color-glow);
 }
 

@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { setLocale } from '../locales'
-import logoImg from '../assets/logo.svg'
+import logoImg from '../assets/logo.png'
 
 const route = useRoute()
 const { t, locale } = useI18n()
@@ -131,8 +131,8 @@ const toggleMenu = () => {
 }
 
 .logo-icon {
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
 }
 
 .logo-text {

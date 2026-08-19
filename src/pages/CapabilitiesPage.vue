@@ -7,33 +7,33 @@ const { t } = useI18n()
 const capabilities = [
   {
     title: '全栈开发能力',
-    desc: '覆盖前端、后端、移动端全栈技术栈，提供一站式开发服务。',
-    items: ['Vue/React前端框架', 'Node.js/Python后端', 'iOS/Android原生开发', '微信小程序']
+    desc: '前端界面、后端服务、移动端应用一体化交付，完整技术栈覆盖，团队内部协作高效。',
+    items: ['Vue / React 前端开发', 'Node / Python 后端服务', 'iOS / Android 原生应用', '微信小程序开发']
   },
   {
-    title: '架构设计能力',
-    desc: '为企业提供高可用、可扩展的系统架构设计方案。',
-    items: ['微服务架构', '云原生部署', '分布式系统', '高并发优化']
+    title: '系统架构能力',
+    desc: '根据业务规模设计高可用、可扩展的技术架构，保障系统在访问量增长时的稳定性。',
+    items: ['微服务架构拆分', '云原生部署方案', '分布式系统设计', '高并发场景优化']
   },
   {
     title: '数据分析能力',
-    desc: '打造数据驱动的业务决策支持系统，释放数据价值。',
-    items: ['数据仓库建设', '实时数据分析', '可视化报表', 'AI智能分析']
+    desc: '构建从数据采集、存储、处理到可视化的完整链路，为业务决策提供有效数据支撑。',
+    items: ['数据仓库搭建', '实时数据处理', '可视化报表呈现', '智能分析建议']
   },
   {
     title: '安全防护能力',
-    desc: '全方位安全体系，保障企业核心数据资产。',
-    items: ['身份认证授权', '数据加密传输', '漏洞扫描修复', '安全审计日志']
+    desc: '建立身份认证、权限管控、传输加密、漏洞扫描等多层安全防护，保障企业核心数据安全。',
+    items: ['统一身份认证授权', '数据加密传输存储', '漏洞扫描与修复', '操作审计日志记录']
   },
   {
-    title: 'DevOps能力',
-    desc: '自动化运维流程，提升研发交付效率。',
-    items: ['CI/CD流水线', '容器化部署', '监控告警', '日志管理']
+    title: 'DevOps 工程能力',
+    desc: '自动化测试、构建、部署与监控体系，提升交付效率，降低人工操作风险。',
+    items: ['CI/CD 持续交付流水线', '容器化部署管理', '运行监控与告警', '日志采集与分析']
   },
   {
-    title: 'UI/UX设计能力',
-    desc: '以用户为中心的设计理念，打造优质产品体验。',
-    items: ['用户研究', '交互设计', '视觉设计', '可用性测试']
+    title: 'UI / UX 设计能力',
+    desc: '从用户使用场景出发，完成界面交互与视觉设计，保证产品体验的易用性与一致性。',
+    items: ['用户研究与分析', '交互流程设计', '视觉风格设计', '可用性测试迭代']
   }
 ]
 
@@ -52,8 +52,10 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.cap-card').forEach((el, i) => {
-    el.classList.add('reveal');
-    ;(el as HTMLElement).style.transitionDelay = `${(i % 3) * 0.1}s`
+    // 按行列从不同对角线方向切入
+    const cls = (i % 2 === 0) ? 'reveal-diag-tl' : 'reveal-diag-br';
+    el.classList.add(cls);
+    (el as HTMLElement).style.transitionDelay = `${(i % 3) * 0.12 + Math.floor(i / 3) * 0.08}s`
     observer.value?.observe(el)
   })
 })
@@ -68,7 +70,7 @@ onUnmounted(() => {
     <section class="page-header">
       <div class="container">
         <h1 class="page-title">{{ t('nav.capabilities') }}</h1>
-        <p class="page-subtitle">多维度技术能力矩阵，支撑企业数字化全链路落地</p>
+        <p class="page-subtitle">覆盖多维度的技术能力，为企业数字化项目提供端到端的技术支撑</p>
       </div>
     </section>
 
@@ -132,7 +134,7 @@ onUnmounted(() => {
 
 .cap-card:hover {
   border-color: var(--color-primary);
-  transform: translateY(-4px);
+  box-shadow: 0 14px 40px var(--color-shadow-hover);
 }
 
 .cap-number {

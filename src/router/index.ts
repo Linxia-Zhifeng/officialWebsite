@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { nextTick } from 'vue'
 import { applyRouteSeo, type SeoMeta } from '../composables/useSeo'
+import { scanReveals } from '../composables/useScrollAnimation'
 
 /** 各路由的 SEO 元信息 */
 const seoMap: Record<string, SeoMeta> = {
@@ -87,9 +89,12 @@ const router = createRouter({
   }
 })
 
-// 路由切换时动态更新 SEO 元信息
-router.afterEach((to) => {
+// 路由切换时动态更新 SEO 元信息，并扫描新挂载的入场动画元素
+router.afterEach(async (to) => {
   applyRouteSeo(to)
+  // 等待新路由的组件挂载完成（子组件 onMounted 已先后执行）
+  await nextTick()
+  scanReveals()
 })
 
 export default router

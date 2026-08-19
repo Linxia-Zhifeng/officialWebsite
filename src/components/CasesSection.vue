@@ -25,15 +25,22 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.case-card').forEach((el, i) => {
-    el.classList.add('reveal');
-    ;(el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
+    const cls = (i === 0 || i === 3) ? 'reveal-diag-tl' : 'reveal-diag-br';
+    el.classList.add(cls);
+    (el as HTMLElement).style.transitionDelay = `${i * 0.12}s`
     observer.value?.observe(el)
   })
 
   const title = document.querySelector('.cases .section-title')
   if (title) {
-    title.classList.add('reveal')
+    title.classList.add('reveal-shine')
     observer.value.observe(title)
+  }
+
+  const more = document.querySelector('.cases-more')
+  if (more) {
+    more.classList.add('reveal-scale')
+    observer.value.observe(more)
   }
 })
 
@@ -105,8 +112,9 @@ onUnmounted(() => {
 }
 
 .case-card:hover {
-  transform: translateY(-6px);
+  transform: rotate(0.5deg);
   border-color: var(--color-primary);
+  box-shadow: 0 16px 48px var(--color-shadow-hover);
 }
 
 .case-cover svg {

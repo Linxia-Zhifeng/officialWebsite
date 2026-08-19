@@ -5,17 +5,17 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const timeline = [
-  { year: '2024', title: '持续成长', desc: '服务企业客户超100家，团队规模扩展至30+人' },
-  { year: '2022', title: '技术沉淀', desc: '完成多个大型系统重构项目，获得客户长期合作认可' },
-  { year: '2020', title: '团队组建', desc: '核心团队稳定，形成全栈开发、产品设计、测试运维全链路能力' },
-  { year: '2018', title: '公司成立', desc: '林下之风科技成立，专注于企业数字化服务' }
+  { year: '2024', title: '慢慢长大', desc: '服务过的企业超过100家，团队也扩展到30多号人了' },
+  { year: '2022', title: '攒了点经验', desc: '做了好几个大系统的重构项目，越来越多客户愿意一直跟我们合作' },
+  { year: '2020', title: '团队凑齐了', desc: '核心成员稳定了，从设计、写代码、测bug到上线维护，啥岗位都有' },
+  { year: '2018', title: '开干了', desc: '林下之风科技成立，就想做点靠谱的软件给企业用' }
 ]
 
 const values = [
-  { icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5', title: '专业深耕', desc: '专注技术积累，深耕行业场景' },
-  { icon: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z', title: '高效交付', desc: '敏捷流程，快速响应，按时交付' },
-  { icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z', title: '务实可靠', desc: '不浮夸，不敷衍，扎实做好每一个项目' },
-  { icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2', title: '长期陪伴', desc: '不止交付，更是长期技术伙伴' }
+  { icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5', title: '沉下心做', desc: '技术慢慢磨，行业慢慢钻，不着急' },
+  { icon: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z', title: '说到做到', desc: '说好什么时候交就什么时候交，有变动提前说' },
+  { icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z', title: '实在做事', desc: '不说虚话，不玩套路，该咋干就咋干' },
+  { icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2', title: '长期搭档', desc: '交完货不跑路，有事随时找得着' }
 ]
 
 const observer = ref<IntersectionObserver | null>(null)
@@ -34,23 +34,29 @@ onMounted(() => {
   
   const intro = document.querySelector('.intro-content')
   if (intro) {
-    intro.classList.add('reveal')
+    intro.classList.add('reveal-ripple')
     observer.value.observe(intro)
   }
 
   document.querySelectorAll('.value-card').forEach((el, i) => {
-    el.classList.add('reveal-scale');
-    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    el.classList.add('reveal-flip');
+    (el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
     observer.value?.observe(el)
   })
 
   document.querySelectorAll('.timeline-item').forEach((el, i) => {
+    const line = el.querySelector('.timeline-line');
+    if (line) {
+      line.classList.add('reveal-flow-line');
+      (line as HTMLElement).style.transitionDelay = `${0.2 + i * 0.1}s`;
+      observer.value?.observe(line);
+    }
     if (i % 2 === 0) {
       el.classList.add('reveal-left');
     } else {
       el.classList.add('reveal-right');
     }
-    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    (el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
     observer.value?.observe(el)
   })
 })
@@ -81,7 +87,7 @@ onUnmounted(() => {
     <section class="values section">
       <div class="container">
         <div class="section-title">
-          <h2>我们的价值观</h2>
+          <h2>我们怎么做事</h2>
         </div>
         <div class="values-grid">
           <div v-for="(value, index) in values" :key="index" class="value-card">
@@ -100,7 +106,7 @@ onUnmounted(() => {
     <section class="timeline-section section">
       <div class="container">
         <div class="section-title">
-          <h2>发展历程</h2>
+          <h2>走过来的路</h2>
         </div>
         <div class="timeline">
           <div
@@ -168,7 +174,6 @@ onUnmounted(() => {
 }
 
 .value-card:hover {
-  transform: translateY(-4px);
   border-color: var(--color-primary);
 }
 

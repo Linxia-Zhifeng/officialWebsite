@@ -28,14 +28,15 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.service-card').forEach((el, i) => {
-    el.classList.add('reveal');
-    ;(el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
+    const cls = i % 2 === 0 ? 'reveal-wave-l' : 'reveal-wave-r';
+    el.classList.add(cls);
+    (el as HTMLElement).style.transitionDelay = `${i * 0.13}s`
     observer.value?.observe(el)
   })
 
   const title = document.querySelector('.services .section-title')
   if (title) {
-    title.classList.add('reveal')
+    title.classList.add('reveal-shine')
     observer.value.observe(title)
   }
 })
@@ -92,8 +93,9 @@ onUnmounted(() => {
 }
 
 .service-card:hover {
-  transform: translateY(-6px);
+  transform: skewX(-1deg);
   border-color: var(--color-primary);
+  box-shadow: 0 14px 40px var(--color-shadow-hover);
 }
 
 .service-card:hover .service-decoration {

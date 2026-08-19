@@ -4,89 +4,89 @@ export default {
     services: 'Services',
     capabilities: 'Capabilities',
     cases: 'Cases',
-    about: 'About',
+    about: 'About Us',
     contact: 'Contact',
     consult: 'Free Consultation'
   },
   hero: {
-    title: 'Under the Forest Wind, Code Forms a Forest',
-    subtitle: 'Focused on custom software development, creating stable and efficient digital solutions for enterprises',
-    btn2: 'View Cases',
-    btn3: 'Contact Us'
+    title: 'Focused on Building Practical Software',
+    subtitle: 'Custom development services that turn your requirements into stable, usable products',
+    btn2: 'View Client Cases',
+    btn3: 'Talk to Our Team'
   },
   advantages: {
-    title: 'Core Advantages',
-    subtitle: 'Translating brand imagery into customer value',
+    title: 'Why Choose Us',
+    subtitle: 'A few good reasons to work together',
     items: [
       {
         icon: 'stability',
-        title: 'Stable as Forest',
-        desc: 'Rigorous coding standards, multi-level testing verification, delivering stable and dependable systems'
+        title: 'Reliable Code Quality',
+        desc: 'Structured coding process and thorough testing ensure stable production systems and lower maintenance cost'
       },
       {
         icon: 'efficiency',
-        title: 'Efficient as Wind',
-        desc: 'Agile development process, rapid requirement response, full project transparency and control'
+        title: 'Transparent Progress',
+        desc: 'Agile delivery with regular milestone updates — issues are surfaced early so deadlines stay on track'
       },
       {
         icon: 'custom',
-        title: 'Deep Customization',
-        desc: 'Deep understanding of business scenarios, no template copying, matching real business needs'
+        title: 'No Generic Templates',
+        desc: 'We take time to understand your actual workflow before designing, so the solution truly fits your needs'
       },
       {
         icon: 'companion',
-        title: 'Full Companion',
-        desc: 'Continuous maintenance and support after launch, long-term iteration, growing with your business'
+        title: 'Long-term Support',
+        desc: 'Continuous O&M and iteration after launch, growing your system alongside your business'
       }
     ]
   },
   services: {
     title: 'Our Services',
-    subtitle: 'Clearly what we can do for you',
+    subtitle: 'What we can help you build',
     items: [
       {
-        title: 'Custom Software Development',
-        desc: 'Building dedicated management systems, business systems, and data systems for enterprises, adapting to unique processes.'
+        title: 'Custom Software Systems',
+        desc: 'Purpose-built systems for internal operations, customer-facing platforms, and data-intensive workflows.'
       },
       {
         title: 'Web & Mobile Development',
-        desc: 'Full-stack development for websites, admin systems, mini-programs, and apps, with consistent cross-device experience.'
+        desc: 'Websites, admin dashboards, mini-programs, and mobile apps — all connected, with a consistent user experience.'
       },
       {
-        title: 'Digital Transformation',
-        desc: 'Full-chain digital planning from business diagnosis to implementation, helping enterprises reduce costs and improve efficiency.'
+        title: 'Digital Strategy Consulting',
+        desc: 'We help map processes and pain points, then propose a practical roadmap with a clear first step.'
       },
       {
-        title: 'Tech O&M & Iteration',
-        desc: 'Maintenance, upgrades, and refactoring of existing systems, continuous performance optimization to match business growth.'
+        title: 'System O&M & Iteration',
+        desc: 'Maintenance, performance tuning, feature extensions, and tech-stack upgrades for existing systems.'
       }
     ]
   },
   process: {
     title: 'Our Process',
-    subtitle: 'Professional and reassuring cooperation',
+    subtitle: 'A clear and structured collaboration',
     steps: [
-      'Requirement Research',
-      'Solution & Quotation',
-      'Development & Iteration',
+      'Requirement & Research',
+      'Proposal & Quote',
+      'Development & Sync',
       'Testing & Launch',
-      'After-sales Support'
+      'Support & Iteration'
     ]
   },
   cases: {
-    title: 'Success Cases',
-    subtitle: 'Results speak for themselves',
-    more: 'View More',
+    title: 'Client Cases',
+    subtitle: 'Some of our delivered results',
+    more: 'View More Cases',
     items: [
       {
         title: 'Manufacturing Production System',
         industry: 'Manufacturing',
-        result: 'Production collaboration efficiency improved by 30%'
+        result: 'Production collaboration up 30%'
       },
       {
-        title: 'Retail Membership System',
+        title: 'Retail Membership Platform',
         industry: 'Retail',
-        result: 'Member repurchase rate increased by 45%'
+        result: 'Member repurchase rate up 45%'
       },
       {
         title: 'Logistics Dispatch Platform',
@@ -96,37 +96,37 @@ export default {
       {
         title: 'SaaS Collaboration Tool',
         industry: 'Software',
-        result: 'Team collaboration efficiency improved by 50%'
+        result: 'Team productivity up 50%'
       }
     ]
   },
   about: {
-    title: 'About Us',
+    title: 'About Linxiafeng Technology',
     p1: 'Linxiafeng Technology is a software company focused on enterprise digital services.',
-    p2: 'Our name "Linxiafeng" (wind under the forest) represents our attitude — elegant, solid, and unhurried. We do not chase trends, do not do redundant development, and focus on code quality to make every project stable and reliable.',
-    p3: 'Our core team has years of experience in software development and industry implementation, covering full-stack development, product design, and testing O&M. We are committed to being your long-term trustworthy technology partner.'
+    p2: 'Our name reflects our approach — steady, thoughtful, and unhurried. We don\'t chase trends or deliver over-designed systems. We focus on solid code and clean delivery, so every project is stable and useful.',
+    p3: 'Our core team brings years of real-world experience across full-stack development, product design, testing, and operations. We aim to be the long-term technology partner you can rely on.'
   },
   contact: {
     title: 'Contact Us',
-    subtitle: 'Let\'s start our cooperation',
-    name: 'Name',
+    subtitle: 'Let\'s discuss your project',
+    name: 'Your Name',
     company: 'Company',
-    phone: 'Phone',
-    message: 'Message',
-    submit: 'Submit',
-    success: 'Submitted successfully, we will contact you soon',
+    phone: 'Phone Number',
+    message: 'Project Description',
+    submit: 'Submit Inquiry',
+    success: 'Submitted successfully — we\'ll reach out shortly',
     address: 'Address',
     addressValue: 'Zhongguancun Science Park, Haidian District, Beijing',
     email: 'Email',
     emailValue: "contact{'@'}linxiafeng.com",
-    tel: 'Tel',
+    tel: 'Service Hotline',
     telValue: '400-888-8888'
   },
   footer: {
-    slogan: 'Linxiafeng Technology — Tech without impatience',
+    slogan: 'Linxiafeng Tech — Solid Delivery, Long-term Partnership',
     icp: 'ICP: XXXXXXXX',
     copyright: '© 2024 Linxiafeng Technology. All rights reserved.',
-    quickNav: 'Quick Navigation',
+    quickNav: 'Quick Links',
     contactUs: 'Contact'
   }
 }

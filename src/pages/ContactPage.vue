@@ -24,20 +24,20 @@ const submitForm = () => {
 
 const faqs = [
   {
-    q: '项目开发周期一般是多久？',
-    a: '根据项目规模和复杂度，一般定制化项目开发周期在2-6个月不等。我们会在需求调研阶段给出详细的时间规划。'
+    q: '做一个项目一般要多长时间？',
+    a: '看活儿多少，简单的一两月搞定，复杂点的三到六个月。需求聊清楚后我们会给个明确的时间表，不瞎忽悠。'
   },
   {
-    q: '是否支持系统二次开发和迭代？',
-    a: '当然支持。我们提供长期技术支持服务，系统上线后可以根据业务发展需求进行功能迭代和优化升级。'
+    q: '上线后想加功能还能找你们吗？',
+    a: '当然可以。我们本来就做长期服务的，系统上线后想加新功能、改老功能，随时聊。'
   },
   {
-    q: '数据安全如何保障？',
-    a: '我们严格遵循数据安全规范，采用加密传输、权限控制、安全审计等多重防护措施，确保您的数据安全。'
+    q: '数据会不会泄露？',
+    a: '该加密的加密，该设权限的设权限，该记日志的记日志。你要是不放心，还可以把代码部署到你自己的服务器上。'
   },
   {
-    q: '是否提供技术培训？',
-    a: '是的。项目交付后，我们会提供详细的技术文档和操作培训，确保您的团队能够独立使用和维护系统。'
+    q: '交付后我们自己不会用咋办？',
+    a: '怕啥，我们会教到你会为止。文字说明、操作视频、线上会议，啥方式顺手就用啥方式。'
   }
 ]
 
@@ -63,19 +63,31 @@ onMounted(() => {
   
   const infoPanel = document.querySelector('.contact-info-panel')
   if (infoPanel) {
-    infoPanel.classList.add('reveal-left')
+    infoPanel.classList.add('reveal-draw')
+    ;(infoPanel as HTMLElement).style.transitionDelay = '0s'
     observer.value.observe(infoPanel)
+    infoPanel.querySelectorAll('.info-item').forEach((el, i) => {
+      el.classList.add('reveal-seq');
+      (el as HTMLElement).style.transitionDelay = `${0.2 + i * 0.1}s`
+      observer.value?.observe(el)
+    })
   }
 
   const formPanel = document.querySelector('.contact-form-panel')
   if (formPanel) {
-    formPanel.classList.add('reveal-right')
+    formPanel.classList.add('reveal-draw')
+    ;(formPanel as HTMLElement).style.transitionDelay = '0.15s'
     observer.value.observe(formPanel)
+    formPanel.querySelectorAll('.form-group, .btn-submit').forEach((el, i) => {
+      el.classList.add('reveal-seq');
+      (el as HTMLElement).style.transitionDelay = `${0.35 + i * 0.1}s`
+      observer.value?.observe(el)
+    })
   }
 
   document.querySelectorAll('.faq-item').forEach((el, i) => {
-    el.classList.add('reveal');
-    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    el.classList.add('reveal-seq');
+    (el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
     observer.value?.observe(el)
   })
 })
@@ -98,7 +110,7 @@ onUnmounted(() => {
       <div class="container">
         <div class="contact-grid">
           <div class="contact-info-panel">
-            <h2>联系方式</h2>
+            <h2>怎么找到我们</h2>
             <div class="info-list">
               <div class="info-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
@@ -132,14 +144,14 @@ onUnmounted(() => {
             </div>
 
             <div class="business-hours">
-              <h3>工作时间</h3>
-              <p>周一至周五 9:00 - 18:00</p>
-              <p>周六 10:00 - 16:00</p>
+              <h3>我们的上班时间</h3>
+              <p>周一到周五 上午9点到下午6点</p>
+              <p>周六 上午10点到下午4点</p>
             </div>
           </div>
 
           <div class="contact-form-panel">
-            <h2>提交需求</h2>
+            <h2>说下你想做啥</h2>
             <form @submit.prevent="submitForm" class="contact-form">
               <div class="form-row">
                 <div class="form-group">
@@ -178,7 +190,7 @@ onUnmounted(() => {
     <section class="faq section">
       <div class="container">
         <div class="section-title">
-          <h2>常见问题</h2>
+          <h2>你可能想问的</h2>
         </div>
         <div class="faq-list">
           <div

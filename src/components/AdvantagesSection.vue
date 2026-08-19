@@ -30,14 +30,14 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.advantage-card').forEach((el, i) => {
-    el.classList.add('reveal');
-    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    el.classList.add('reveal-flip');
+    (el as HTMLElement).style.transitionDelay = `${i * 0.12}s`
     observer.value?.observe(el)
   })
 
   const title = document.querySelector('.advantages .section-title')
   if (title) {
-    title.classList.add('reveal')
+    title.classList.add('reveal-shine')
     observer.value.observe(title)
   }
 })
@@ -96,8 +96,8 @@ onUnmounted(() => {
 }
 
 .advantage-card:hover {
-  transform: translateY(-8px);
   border-color: var(--color-secondary);
+  box-shadow: 0 14px 40px var(--color-shadow-hover);
 }
 
 .advantage-icon {

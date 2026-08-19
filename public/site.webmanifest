@@ -4,14 +4,14 @@
   "description": "林下之风科技，专注于企业数字化服务的软件开发公司。定制软件系统开发、Web与移动端开发、数字化转型咨询、技术运维与迭代。",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0f",
-  "theme_color": "#863bff",
+  "background_color": "#ffffff",
+  "theme_color": "#0B7285",
   "lang": "zh-CN",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/favicon.png",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     }
   ]

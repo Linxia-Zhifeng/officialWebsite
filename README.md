@@ -1,5 +1,94 @@
-# Vue 3 + TypeScript + Vite
+# 林下之风科技 · 官方网站
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+欢迎来到林下之风科技的官方网站项目。
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+我们是一家专注于企业数字化服务的软件开发公司。取名"林下之风"，意在秉持清雅、扎实、从容的做事态度——不追逐概念噱头，不做冗余开发，沉下心打磨代码质量，把每一个项目做稳、做实。
+
+团队核心成员均拥有多年软件开发与行业落地经验，覆盖全栈开发、产品设计、测试运维全链路，致力于成为企业长期可信赖的技术伙伴。
+
+## 我们能做什么
+
+- 定制软件系统开发：面向企业全场景需求，打造专属管理系统、业务系统、数据系统，适配企业独特流程
+- Web 与移动端开发：官网、后台管理系统、小程序、APP 全端开发，多端数据互通，体验一致流畅
+- 数字化转型咨询：从业务诊断到方案落地，提供全链路数字化规划，帮企业少走弯路、降本提效
+- 技术运维与迭代：现有系统的维护、升级、重构，持续优化性能，匹配业务规模的成长节奏
+
+## 我们的做事方式
+
+- 如林稳固：严谨代码规范，多层级测试校验，交付系统稳定可依赖
+- 如风高效：敏捷开发流程，需求快速响应，项目周期全程透明可控
+- 定制深耕：深入业务场景，拒绝模板套用，匹配企业真实发展需求
+- 全程陪伴：上线后持续运维支持，长期迭代优化，伴随企业成长
+
+## 技术栈
+
+本项目基于以下技术构建：
+
+- Vue 3（Composition API + `<script setup>`）
+- TypeScript
+- Vite
+- Vue Router 5
+- Vue I18n 11（支持中/英双语）
+- 原生 CSS（CSS Variables 实现主题系统）
+
+## 开发指南
+
+### 环境准备
+
+需要在本地安装 [Node.js](https://nodejs.org/)（推荐 18+）和 [pnpm](https://pnpm.io/) 包管理器。
+
+### 常用命令
+
+```bash
+# 安装依赖
+pnpm install
+
+# 启动开发服务器
+pnpm dev
+
+# 构建生产版本
+pnpm build
+
+# 预览生产版本
+pnpm preview
+```
+
+### 项目结构
+
+```
+src/
+├── assets/          # 静态资源（Logo 图片等）
+├── components/      # 通用组件（Header、Footer、各板块 Section）
+├── composables/     # 组合式函数（主题管理、滚动动画、SEO 等）
+├── locales/         # 国际化文案（zh.ts / en.ts）
+├── pages/           # 页面组件
+├── router/          # 路由配置
+├── styles/          # 全局样式与主题变量
+├── App.vue
+├── main.ts
+└── style.css
+```
+
+### 功能特性
+
+- 主题切换：支持浅色/深色两种主题，用户选择持久化到本地
+- 国际化：支持中文和英文，可扩展更多语言
+- 响应式设计：适配桌面端、平板和移动端
+- 页面路由：首页、业务服务、技术能力、客户案例、关于我们、联系我们
+
+### 代码规范
+
+- 使用 `<script setup lang="ts">` 语法，Props 和 emits 需显式声明类型
+- 样式遵循 BEM 命名规范，使用 CSS Variables 引用主题色
+- 新增文案需同时添加到 `zh.ts` 和 `en.ts`
+- 新增页面需在 `router/index.ts` 中注册路由
+
+## 联系我们
+
+如果您对我们的服务感兴趣，或希望就技术合作进行交流，欢迎通过以下方式联系我们：
+
+- 邮箱：contact@linxiafeng.com
+- 电话：400-888-8888
+- 地址：北京市海淀区中关村科技园区
+
+林下之风科技 —— 不浮躁的技术服务

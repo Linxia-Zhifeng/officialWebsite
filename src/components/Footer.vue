@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import logoImg from '../assets/logo.svg'
+import logoImg from '../assets/logo.png'
 
 const { t } = useI18n()
 
@@ -95,8 +95,8 @@ const navLinks = [
 }
 
 .logo-icon {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
 }
 
 .slogan {
