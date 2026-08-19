@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -16,6 +17,47 @@ const values = [
   { icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z', title: '务实可靠', desc: '不浮夸，不敷衍，扎实做好每一个项目' },
   { icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2', title: '长期陪伴', desc: '不止交付，更是长期技术伙伴' }
 ]
+
+const observer = ref<IntersectionObserver | null>(null)
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+  
+  const intro = document.querySelector('.intro-content')
+  if (intro) {
+    intro.classList.add('reveal')
+    observer.value.observe(intro)
+  }
+
+  document.querySelectorAll('.value-card').forEach((el, i) => {
+    el.classList.add('reveal-scale');
+    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    observer.value?.observe(el)
+  })
+
+  document.querySelectorAll('.timeline-item').forEach((el, i) => {
+    if (i % 2 === 0) {
+      el.classList.add('reveal-left');
+    } else {
+      el.classList.add('reveal-right');
+    }
+    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    observer.value?.observe(el)
+  })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
+})
 </script>
 
 <template>
@@ -127,7 +169,7 @@ const values = [
 
 .value-card:hover {
   transform: translateY(-4px);
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
 }
 
 .value-icon {

@@ -1,14 +1,96 @@
 <!doctype html>
-<html lang="zh" data-theme="light">
+<html lang="zh" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 基础 SEO -->
     <title>林下之风科技 - 专注定制化软件开发</title>
     <meta name="description" content="林下之风科技，专注于企业数字化服务的软件开发公司。定制软件系统开发、Web与移动端开发、数字化转型咨询、技术运维与迭代。" />
+    <meta name="keywords" content="定制软件开发,企业数字化,Web开发,移动端开发,数字化转型,技术运维,软件外包,北京软件开发公司,林下之风科技,custom software development" />
+    <meta name="author" content="林下之风科技" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#863bff" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- canonical 与 hreflang（中英双语） -->
+    <link rel="canonical" href="https://www.linxiafeng.com/" />
+    <link rel="alternate" hreflang="zh" href="https://www.linxiafeng.com/" />
+    <link rel="alternate" hreflang="en" href="https://www.linxiafeng.com/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://www.linxiafeng.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="林下之风科技 - 专注定制化软件开发" />
+    <meta property="og:description" content="林下之风科技，专注于企业数字化服务的软件开发公司。定制软件系统开发、Web与移动端开发、数字化转型咨询、技术运维与迭代。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.linxiafeng.com/" />
+    <meta property="og:image" content="https://www.linxiafeng.com/og-image.jpg" />
+    <meta property="og:site_name" content="林下之风科技" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="林下之风科技 - 专注定制化软件开发" />
+    <meta name="twitter:description" content="专注于企业数字化服务的软件开发公司。定制软件系统开发、Web与移动端开发、数字化转型咨询、技术运维与迭代。" />
+    <meta name="twitter:image" content="https://www.linxiafeng.com/og-image.jpg" />
+
+    <!-- 性能优化：预连接 -->
+    <link rel="dns-prefetch" href="//www.linxiafeng.com" />
+
+    <!-- 结构化数据：组织信息 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "林下之风科技",
+      "alternateName": "Linxiafeng Technology",
+      "url": "https://www.linxiafeng.com/",
+      "logo": "https://www.linxiafeng.com/favicon.svg",
+      "image": "https://www.linxiafeng.com/og-image.jpg",
+      "description": "专注于企业数字化服务的软件开发公司。提供定制软件系统开发、Web与移动端开发、数字化转型咨询、技术运维与迭代服务。",
+      "email": "contact@linxiafeng.com",
+      "telephone": "400-888-8888",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CN",
+        "addressRegion": "北京市",
+        "addressLocality": "海淀区",
+        "streetAddress": "中关村科技园区"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "400-888-8888",
+        "contactType": "customer service",
+        "areaServed": "CN",
+        "availableLanguage": ["Chinese", "English"]
+      },
+      "sameAs": []
+    }
+    </script>
+
+    <!-- 结构化数据：网站信息 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "林下之风科技",
+      "alternateName": "Linxiafeng Technology",
+      "url": "https://www.linxiafeng.com/",
+      "inLanguage": ["zh-CN", "en"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "林下之风科技"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="app"></div>
+    <noscript>林下之风科技，专注于企业数字化服务的软件开发公司。定制软件系统开发、Web与移动端开发、数字化转型咨询、技术运维与迭代。联系电话：400-888-8888，邮箱：contact@linxiafeng.com</noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

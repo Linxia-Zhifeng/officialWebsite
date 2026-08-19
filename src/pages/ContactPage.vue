@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -46,6 +46,43 @@ const activeFaq = ref<number | null>(null)
 const toggleFaq = (index: number) => {
   activeFaq.value = activeFaq.value === index ? null : index
 }
+
+const observer = ref<IntersectionObserver | null>(null)
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+  
+  const infoPanel = document.querySelector('.contact-info-panel')
+  if (infoPanel) {
+    infoPanel.classList.add('reveal-left')
+    observer.value.observe(infoPanel)
+  }
+
+  const formPanel = document.querySelector('.contact-form-panel')
+  if (formPanel) {
+    formPanel.classList.add('reveal-right')
+    observer.value.observe(formPanel)
+  }
+
+  document.querySelectorAll('.faq-item').forEach((el, i) => {
+    el.classList.add('reveal');
+    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
+    observer.value?.observe(el)
+  })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
+})
 </script>
 
 <template>
@@ -222,7 +259,7 @@ const toggleFaq = (index: number) => {
 }
 
 .info-item svg {
-  color: var(--color-secondary);
+  color: var(--color-primary);
   flex-shrink: 0;
   margin-top: var(--spacing-xs);
 }
@@ -346,7 +383,7 @@ const toggleFaq = (index: number) => {
 }
 
 .faq-question:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
 }
 
 .faq-icon {

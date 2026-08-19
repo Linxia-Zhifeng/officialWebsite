@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -35,6 +36,31 @@ const capabilities = [
     items: ['用户研究', '交互设计', '视觉设计', '可用性测试']
   }
 ]
+
+const observer = ref<IntersectionObserver | null>(null)
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+  
+  document.querySelectorAll('.cap-card').forEach((el, i) => {
+    el.classList.add('reveal');
+    ;(el as HTMLElement).style.transitionDelay = `${(i % 3) * 0.1}s`
+    observer.value?.observe(el)
+  })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
+})
 </script>
 
 <template>
@@ -105,14 +131,14 @@ const capabilities = [
 }
 
 .cap-card:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
   transform: translateY(-4px);
 }
 
 .cap-number {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   opacity: 0.3;
   margin-bottom: var(--spacing-md);
 }

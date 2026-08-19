@@ -11,8 +11,8 @@ export default {
   hero: {
     title: '林下清风至，代码自成林',
     subtitle: '专注定制化软件开发，为企业打造稳固、高效的数字化解决方案',
-    btn1: '免费需求评估',
-    btn2: '查看服务案例'
+    btn2: '查看服务案例',
+    btn3: '联系我们'
   },
   advantages: {
     title: '核心优势',

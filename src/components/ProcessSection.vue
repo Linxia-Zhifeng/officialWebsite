@@ -22,8 +22,8 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.process-step').forEach((el, i) => {
-    el.classList.add('reveal-scale')
-    el.style.transitionDelay = `${i * 0.15}s`
+    el.classList.add('reveal-scale');
+    ;(el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
     observer.value?.observe(el)
   })
 

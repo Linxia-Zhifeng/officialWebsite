@@ -18,11 +18,13 @@ const navLinks = [
     <div class="container footer-inner">
       <div class="footer-brand">
         <div class="logo">
-          <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="20" width="4" height="14" rx="1" fill="currentColor"/>
-            <rect x="14" y="14" width="4" height="20" rx="1" fill="currentColor" opacity="0.7"/>
-            <rect x="22" y="6" width="4" height="28" rx="1" fill="currentColor" opacity="0.5"/>
-            <rect x="30" y="18" width="4" height="16" rx="1" fill="currentColor" opacity="0.3"/>
+          <svg class="logo-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="24" width="6" height="20" rx="1" fill="#0B7285"/>
+            <rect x="14" y="16" width="6" height="28" rx="1" fill="#1190A5"/>
+            <rect x="24" y="8" width="6" height="36" rx="1" fill="#1B8AAA"/>
+            <rect x="34" y="12" width="6" height="32" rx="1" fill="#2FB8A6"/>
+            <rect x="44" y="20" width="6" height="24" rx="1" fill="#4FD9C4"/>
+            <rect x="52" y="28" width="4" height="16" rx="1" fill="#7EE5D4"/>
           </svg>
           <span>林下之风</span>
         </div>
@@ -44,20 +46,20 @@ const navLinks = [
       <div class="footer-contact">
         <h4>{{ t('footer.contactUs') }}</h4>
         <p class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="16" height="16">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
           </svg>
           contact@linxiafeng.com
         </p>
         <p class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="16" height="16">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
           400-888-8888
         </p>
         <p class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="16" height="16">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
             <circle cx="12" cy="10" r="3"/>
           </svg>
@@ -101,7 +103,6 @@ const navLinks = [
 .logo-icon {
   width: 32px;
   height: 32px;
-  color: var(--color-primary);
 }
 
 .slogan {

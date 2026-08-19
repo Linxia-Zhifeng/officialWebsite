@@ -11,8 +11,8 @@ export default {
   hero: {
     title: 'Under the Forest Wind, Code Forms a Forest',
     subtitle: 'Focused on custom software development, creating stable and efficient digital solutions for enterprises',
-    btn1: 'Free Assessment',
-    btn2: 'View Cases'
+    btn2: 'View Cases',
+    btn3: 'Contact Us'
   },
   advantages: {
     title: 'Core Advantages',

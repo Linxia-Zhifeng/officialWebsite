@@ -1,6 +1,7 @@
 <script setup lang="ts">import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
+import logoImg from '../assets/logo.svg';
 const { t } = useI18n();
 const router = useRouter();
 const isLoaded = ref(false);
@@ -55,39 +56,18 @@ onMounted(() => {
 
     <div class="container hero-content" :class="{ loaded: isLoaded }">
       <div class="logo-mark" :class="{ animate: isLoaded }">
-        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="32" width="8" height="32" rx="2" fill="#0B7285">
-            <animate attributeName="y" values="32;28;32" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="height" values="32;36;32" dur="3s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="22" y="20" width="8" height="44" rx="2" fill="#1190A5">
-            <animate attributeName="y" values="20;16;20" dur="3s" begin="0.2s" repeatCount="indefinite"/>
-            <animate attributeName="height" values="44;48;44" dur="3s" begin="0.2s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="36" y="8" width="8" height="56" rx="2" fill="#1B8AAA">
-            <animate attributeName="y" values="8;4;8" dur="3s" begin="0.4s" repeatCount="indefinite"/>
-            <animate attributeName="height" values="56;60;56" dur="3s" begin="0.4s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="50" y="16" width="8" height="48" rx="2" fill="#2FB8A6">
-            <animate attributeName="y" values="16;12;16" dur="3s" begin="0.6s" repeatCount="indefinite"/>
-            <animate attributeName="height" values="48;52;48" dur="3s" begin="0.6s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="64" y="24" width="8" height="40" rx="2" fill="#4FD9C4">
-            <animate attributeName="y" values="24;20;24" dur="3s" begin="0.8s" repeatCount="indefinite"/>
-            <animate attributeName="height" values="40;44;40" dur="3s" begin="0.8s" repeatCount="indefinite"/>
-          </rect>
-        </svg>
+        <img :src="logoImg" alt="林下之风" />
       </div>
 
       <h1 class="hero-title" :class="{ animate: isLoaded }">{{ t('hero.title') }}</h1>
       <p class="hero-subtitle" :class="{ animate: isLoaded }">{{ t('hero.subtitle') }}</p>
 
       <div class="hero-actions" :class="{ animate: isLoaded }">
-        <button class="btn btn-primary btn-lg" @click="goContact">
-          {{ t('hero.btn1') }}
-        </button>
-        <button class="btn btn-secondary btn-lg" @click="goCases">
+        <button class="btn btn-primary btn-lg" @click="goCases">
           {{ t('hero.btn2') }}
+        </button>
+        <button class="btn btn-secondary btn-lg" @click="goContact">
+          {{ t('hero.btn3') }}
         </button>
       </div>
     </div>
@@ -218,7 +198,7 @@ onMounted(() => {
   transform: scale(1);
 }
 
-.logo-mark svg {
+.logo-mark img {
   width: 100px;
   height: 100px;
 }
@@ -230,13 +210,11 @@ onMounted(() => {
   margin-bottom: var(--spacing-lg);
   letter-spacing: -0.02em;
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease 0.2s;
+  transition: opacity 0.8s ease 0.2s;
 }
 
 .hero-title.animate {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .hero-subtitle {
@@ -246,13 +224,11 @@ onMounted(() => {
   margin: 0 auto var(--spacing-2xl);
   line-height: var(--line-height-relaxed);
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease 0.4s;
+  transition: opacity 0.8s ease 0.4s;
 }
 
 .hero-subtitle.animate {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .hero-actions {
@@ -261,13 +237,11 @@ onMounted(() => {
   gap: var(--spacing-md);
   flex-wrap: wrap;
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease 0.6s;
+  transition: opacity 0.8s ease 0.6s;
 }
 
 .hero-actions.animate {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .btn-lg {
@@ -332,7 +306,7 @@ onMounted(() => {
     align-items: center;
   }
 
-  .logo-mark svg {
+  .logo-mark img {
     width: 70px;
     height: 70px;
   }

@@ -28,8 +28,8 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.service-card').forEach((el, i) => {
-    el.classList.add('reveal')
-    el.style.transitionDelay = `${i * 0.15}s`
+    el.classList.add('reveal');
+    ;(el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
     observer.value?.observe(el)
   })
 

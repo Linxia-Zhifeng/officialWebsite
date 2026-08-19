@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -75,6 +75,31 @@ const filteredCases = () => {
   if (activeFilter.value === 'all') return allCases
   return allCases.filter(c => c.industryKey === activeFilter.value)
 }
+
+const observer = ref<IntersectionObserver | null>(null)
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+  
+  document.querySelectorAll('.case-detail-card').forEach((el, i) => {
+    el.classList.add('reveal');
+    ;(el as HTMLElement).style.transitionDelay = `${(i % 2) * 0.15}s`
+    observer.value?.observe(el)
+  })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
+})
 </script>
 
 <template>
@@ -218,7 +243,7 @@ const filteredCases = () => {
   display: inline-block;
   padding: var(--spacing-xs) var(--spacing-sm);
   background-color: var(--color-bg-secondary);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   font-size: var(--font-size-xs);
   border-radius: var(--radius-sm);
   margin-bottom: var(--spacing-sm);

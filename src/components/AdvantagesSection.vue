@@ -30,8 +30,8 @@ onMounted(() => {
   )
   
   document.querySelectorAll('.advantage-card').forEach((el, i) => {
-    el.classList.add('reveal')
-    el.style.transitionDelay = `${i * 0.1}s`
+    el.classList.add('reveal');
+    ;(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
     observer.value?.observe(el)
   })
 
