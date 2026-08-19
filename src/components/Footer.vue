@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import logoImg from '../assets/logo.svg'
 
 const { t } = useI18n()
 
@@ -18,14 +19,7 @@ const navLinks = [
     <div class="container footer-inner">
       <div class="footer-brand">
         <div class="logo">
-          <svg class="logo-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="24" width="6" height="20" rx="1" fill="#0B7285"/>
-            <rect x="14" y="16" width="6" height="28" rx="1" fill="#1190A5"/>
-            <rect x="24" y="8" width="6" height="36" rx="1" fill="#1B8AAA"/>
-            <rect x="34" y="12" width="6" height="32" rx="1" fill="#2FB8A6"/>
-            <rect x="44" y="20" width="6" height="24" rx="1" fill="#4FD9C4"/>
-            <rect x="52" y="28" width="4" height="16" rx="1" fill="#7EE5D4"/>
-          </svg>
+          <img class="logo-icon" :src="logoImg" alt="林下之风" />
           <span>林下之风</span>
         </div>
         <p class="slogan">{{ t('footer.slogan') }}</p>
