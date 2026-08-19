@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t } = useI18n()
 
@@ -21,30 +22,19 @@ const submitForm = () => {
   }, 3000)
 }
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
+  const targets: Element[] = []
+
   const infoEl = document.querySelector('.contact-info')
   if (infoEl) {
     infoEl.classList.add('reveal-draw');
     (infoEl as HTMLElement).style.transitionDelay = '0s'
-    observer.value.observe(infoEl)
+    targets.push(infoEl)
     // info 下每个 item 依次显现
     infoEl.querySelectorAll('.info-item').forEach((el, i) => {
       el.classList.add('reveal-seq');
       (el as HTMLElement).style.transitionDelay = `${0.3 + i * 0.12}s`
-      observer.value?.observe(el)
+      targets.push(el)
     })
   }
 
@@ -52,18 +42,16 @@ onMounted(() => {
   if (formEl) {
     formEl.classList.add('reveal-draw');
     (formEl as HTMLElement).style.transitionDelay = '0.15s'
-    observer.value.observe(formEl)
+    targets.push(formEl)
     // 每个 form-group/按钮依次显现
     formEl.querySelectorAll('.form-group, .btn-submit').forEach((el, i) => {
       el.classList.add('reveal-seq');
       (el as HTMLElement).style.transitionDelay = `${0.35 + i * 0.12}s`
-      observer.value?.observe(el)
+      targets.push(el)
     })
   }
-})
 
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(targets)
 })
 </script>
 

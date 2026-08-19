@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t, tm } = useI18n()
 
@@ -13,36 +14,14 @@ const serviceIcons = [
 
 const services = tm('services.items') as any[]
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
-  document.querySelectorAll('.service-card').forEach((el, i) => {
+  const cards = document.querySelectorAll('.service-card')
+  cards.forEach((el, i) => {
     const cls = i % 2 === 0 ? 'reveal-wave-l' : 'reveal-wave-r';
     el.classList.add(cls);
     (el as HTMLElement).style.transitionDelay = `${i * 0.13}s`
-    observer.value?.observe(el)
   })
-
-  const title = document.querySelector('.services .section-title')
-  if (title) {
-    title.classList.add('reveal-shine')
-    observer.value.observe(title)
-  }
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(cards)
 })
 </script>
 

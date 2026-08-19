@@ -1,40 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import logoImg from '../assets/logo.png'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t } = useI18n()
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
   const textEl = document.querySelector('.about-text')
   if (textEl) {
     textEl.classList.add('reveal-ripple')
-    observer.value.observe(textEl)
+    observeReveal(textEl)
   }
 
   const visualEl = document.querySelector('.about-visual')
   if (visualEl) {
     visualEl.classList.add('reveal-scale');
     (visualEl as HTMLElement).style.transitionDelay = '0.25s'
-    observer.value.observe(visualEl)
+    observeReveal(visualEl)
   }
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
 })
 </script>
 

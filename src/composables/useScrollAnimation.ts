@@ -13,7 +13,7 @@ import { onMounted } from 'vue'
 
 const REVEAL_SELECTORS = [
   '.reveal', '.reveal-left', '.reveal-right', '.reveal-scale',
-  '.reveal-flip', '.reveal-shine',
+  '.reveal-flip',
   '.reveal-wave-l', '.reveal-wave-r',
   '.reveal-flow', '.reveal-flow-line',
   '.reveal-diag-tl', '.reveal-diag-br',

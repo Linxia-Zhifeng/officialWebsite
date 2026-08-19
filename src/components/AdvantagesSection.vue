@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t, tm } = useI18n()
 
@@ -15,35 +16,13 @@ const advantages = tm('advantages.items') as any[]
 
 const getIconPath = (icon: string) => iconPaths[icon] || iconPaths.stability
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
-  document.querySelectorAll('.advantage-card').forEach((el, i) => {
+  const cards = document.querySelectorAll('.advantage-card')
+  cards.forEach((el, i) => {
     el.classList.add('reveal-flip');
     (el as HTMLElement).style.transitionDelay = `${i * 0.12}s`
-    observer.value?.observe(el)
   })
-
-  const title = document.querySelector('.advantages .section-title')
-  if (title) {
-    title.classList.add('reveal-shine')
-    observer.value.observe(title)
-  }
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(cards)
 })
 </script>
 

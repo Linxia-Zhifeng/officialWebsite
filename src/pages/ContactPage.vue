@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t } = useI18n()
 
@@ -47,29 +48,18 @@ const toggleFaq = (index: number) => {
   activeFaq.value = activeFaq.value === index ? null : index
 }
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
+  const targets: Element[] = []
+
   const infoPanel = document.querySelector('.contact-info-panel')
   if (infoPanel) {
     infoPanel.classList.add('reveal-draw')
     ;(infoPanel as HTMLElement).style.transitionDelay = '0s'
-    observer.value.observe(infoPanel)
+    targets.push(infoPanel)
     infoPanel.querySelectorAll('.info-item').forEach((el, i) => {
       el.classList.add('reveal-seq');
       (el as HTMLElement).style.transitionDelay = `${0.2 + i * 0.1}s`
-      observer.value?.observe(el)
+      targets.push(el)
     })
   }
 
@@ -77,23 +67,22 @@ onMounted(() => {
   if (formPanel) {
     formPanel.classList.add('reveal-draw')
     ;(formPanel as HTMLElement).style.transitionDelay = '0.15s'
-    observer.value.observe(formPanel)
+    targets.push(formPanel)
     formPanel.querySelectorAll('.form-group, .btn-submit').forEach((el, i) => {
       el.classList.add('reveal-seq');
       (el as HTMLElement).style.transitionDelay = `${0.35 + i * 0.1}s`
-      observer.value?.observe(el)
+      targets.push(el)
     })
   }
 
-  document.querySelectorAll('.faq-item').forEach((el, i) => {
+  const faqItems = document.querySelectorAll('.faq-item')
+  faqItems.forEach((el, i) => {
     el.classList.add('reveal-seq');
     (el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
-    observer.value?.observe(el)
   })
-})
 
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(targets)
+  observeReveal(faqItems)
 })
 </script>
 

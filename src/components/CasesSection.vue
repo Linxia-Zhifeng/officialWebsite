@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t, tm } = useI18n()
 const router = useRouter()
@@ -10,42 +11,20 @@ const cases = tm('cases.items') as any[]
 
 const goCases = () => router.push('/cases')
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
-  document.querySelectorAll('.case-card').forEach((el, i) => {
+  const cards = document.querySelectorAll('.case-card')
+  cards.forEach((el, i) => {
     const cls = (i === 0 || i === 3) ? 'reveal-diag-tl' : 'reveal-diag-br';
     el.classList.add(cls);
     (el as HTMLElement).style.transitionDelay = `${i * 0.12}s`
-    observer.value?.observe(el)
   })
-
-  const title = document.querySelector('.cases .section-title')
-  if (title) {
-    title.classList.add('reveal-shine')
-    observer.value.observe(title)
-  }
+  observeReveal(cards)
 
   const more = document.querySelector('.cases-more')
   if (more) {
     more.classList.add('reveal-scale')
-    observer.value.observe(more)
+    observeReveal(more)
   }
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
 })
 </script>
 

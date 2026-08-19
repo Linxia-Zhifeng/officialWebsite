@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t } = useI18n()
 
@@ -18,30 +19,19 @@ const values = [
   { icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2', title: '长期搭档', desc: '交完货不跑路，有事随时找得着' }
 ]
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
+  const targets: Element[] = []
+
   const intro = document.querySelector('.intro-content')
   if (intro) {
     intro.classList.add('reveal-ripple')
-    observer.value.observe(intro)
+    targets.push(intro)
   }
 
   document.querySelectorAll('.value-card').forEach((el, i) => {
     el.classList.add('reveal-flip');
     (el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
-    observer.value?.observe(el)
+    targets.push(el)
   })
 
   document.querySelectorAll('.timeline-item').forEach((el, i) => {
@@ -49,7 +39,7 @@ onMounted(() => {
     if (line) {
       line.classList.add('reveal-flow-line');
       (line as HTMLElement).style.transitionDelay = `${0.2 + i * 0.1}s`;
-      observer.value?.observe(line);
+      targets.push(line);
     }
     if (i % 2 === 0) {
       el.classList.add('reveal-left');
@@ -57,12 +47,10 @@ onMounted(() => {
       el.classList.add('reveal-right');
     }
     (el as HTMLElement).style.transitionDelay = `${i * 0.1}s`
-    observer.value?.observe(el)
+    targets.push(el)
   })
-})
 
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(targets)
 })
 </script>
 

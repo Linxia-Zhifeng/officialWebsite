@@ -1,26 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t, tm } = useI18n()
 
 const steps = tm('process.steps') as string[]
 const stepsCount = steps.length
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
+  const targets: Element[] = []
+
   document.querySelectorAll('.process-step').forEach((el, i) => {
     const dot = el.querySelector('.step-dot');
     const line = el.querySelector('.step-line');
@@ -28,32 +18,23 @@ onMounted(() => {
     if (dot) {
       dot.classList.add('reveal-flow');
       (dot as HTMLElement).style.transitionDelay = `${0.1 + i * 0.1}s`;
-      observer.value?.observe(dot);
+      targets.push(dot)
     }
     if (line) {
       line.classList.add('reveal-flow-line');
       (line as HTMLElement).style.transitionDelay = `${0.25 + i * 0.1}s`;
-      observer.value?.observe(line);
+      targets.push(line)
     }
     if (content) {
       content.classList.add('reveal-flow');
       (content as HTMLElement).style.transitionDelay = `${0.4 + i * 0.1}s`;
-      observer.value?.observe(content);
+      targets.push(content)
     }
     el.classList.add('reveal-flow');
     (el as HTMLElement).style.transitionDelay = `${i * 0.05}s`;
-    observer.value?.observe(el);
+    targets.push(el)
   })
-
-  const title = document.querySelector('.process .section-title')
-  if (title) {
-    title.classList.add('reveal-shine')
-    observer.value.observe(title)
-  }
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(targets)
 })
 </script>
 

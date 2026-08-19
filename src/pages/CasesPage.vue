@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t } = useI18n()
 
@@ -76,30 +77,29 @@ const filteredCases = () => {
   return allCases.filter(c => c.industryKey === activeFilter.value)
 }
 
-const observer = ref<IntersectionObserver | null>(null)
-
-onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
-  document.querySelectorAll('.case-detail-card').forEach((el, i) => {
+// 筛选切换后重新为列表项绑定入场动画
+watch(activeFilter, async () => {
+  await nextTick()
+  const cards = document.querySelectorAll('.case-detail-card')
+  cards.forEach((el, i) => {
+    el.classList.remove('visible')
+    el.classList.remove('reveal-wave-l', 'reveal-wave-r')
+    el.removeAttribute('data-reveal-observed')
     const cls = i % 2 === 0 ? 'reveal-wave-l' : 'reveal-wave-r';
     el.classList.add(cls);
     (el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
-    observer.value?.observe(el)
   })
+  observeReveal(cards)
 })
 
-onUnmounted(() => {
-  observer.value?.disconnect()
+onMounted(() => {
+  const cards = document.querySelectorAll('.case-detail-card')
+  cards.forEach((el, i) => {
+    const cls = i % 2 === 0 ? 'reveal-wave-l' : 'reveal-wave-r';
+    el.classList.add(cls);
+    (el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
+  })
+  observeReveal(cards)
 })
 </script>
 

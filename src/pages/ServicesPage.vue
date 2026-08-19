@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t } = useI18n()
 
@@ -31,30 +32,14 @@ const services = [
   }
 ]
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
-  document.querySelectorAll('.service-block').forEach((el, i) => {
+  const blocks = document.querySelectorAll('.service-block')
+  blocks.forEach((el, i) => {
     const cls = i % 2 === 0 ? 'reveal-flip' : 'reveal-ripple'
     el.classList.add(cls);
     (el as HTMLElement).style.transitionDelay = `${i * 0.15}s`
-    observer.value?.observe(el)
   })
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(blocks)
 })
 </script>
 

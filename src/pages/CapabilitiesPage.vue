@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { observeReveal } from '../composables/useScrollAnimation'
 
 const { t } = useI18n()
 
@@ -37,31 +38,15 @@ const capabilities = [
   }
 ]
 
-const observer = ref<IntersectionObserver | null>(null)
-
 onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  
-  document.querySelectorAll('.cap-card').forEach((el, i) => {
+  const cards = document.querySelectorAll('.cap-card')
+  cards.forEach((el, i) => {
     // 按行列从不同对角线方向切入
     const cls = (i % 2 === 0) ? 'reveal-diag-tl' : 'reveal-diag-br';
     el.classList.add(cls);
     (el as HTMLElement).style.transitionDelay = `${(i % 3) * 0.12 + Math.floor(i / 3) * 0.08}s`
-    observer.value?.observe(el)
   })
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
+  observeReveal(cards)
 })
 </script>
 
