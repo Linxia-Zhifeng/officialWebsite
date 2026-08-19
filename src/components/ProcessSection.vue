@@ -1,0 +1,163 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, tm } = useI18n()
+
+const steps = tm('process.steps') as string[]
+const stepsCount = steps.length
+
+const observer = ref<IntersectionObserver | null>(null)
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+  
+  document.querySelectorAll('.process-step').forEach((el, i) => {
+    el.classList.add('reveal-scale')
+    el.style.transitionDelay = `${i * 0.15}s`
+    observer.value?.observe(el)
+  })
+
+  const title = document.querySelector('.process .section-title')
+  if (title) {
+    title.classList.add('reveal')
+    observer.value.observe(title)
+  }
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
+})
+</script>
+
+<template>
+  <section class="process section">
+    <div class="container">
+      <div class="section-title">
+        <h2>{{ t('process.title') }}</h2>
+        <p>{{ t('process.subtitle') }}</p>
+      </div>
+
+      <div class="process-timeline">
+        <div
+          v-for="(step, index) in steps"
+          :key="index"
+          class="process-step"
+        >
+          <div class="step-dot">
+            <span class="step-number">{{ index + 1 }}</span>
+          </div>
+          <div v-if="index < stepsCount - 1" class="step-line"></div>
+          <div class="step-content">
+            <p class="step-label">{{ step }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.process {
+  background-color: var(--color-bg-secondary);
+}
+
+.process-timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: var(--spacing-3xl);
+  position: relative;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.step-dot {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-bg-card);
+  border: 2px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  z-index: 2;
+  transition: all var(--transition-normal);
+}
+
+.process-step:hover .step-dot {
+  background-color: var(--color-primary);
+  transform: scale(1.1);
+  box-shadow: 0 0 0 6px var(--color-glow);
+}
+
+.step-number {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  transition: color var(--transition-normal);
+}
+
+.process-step:hover .step-number {
+  color: #fff;
+}
+
+.step-line {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+  z-index: 1;
+}
+
+.step-content {
+  text-align: center;
+  padding: 0 var(--spacing-sm);
+}
+
+.step-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .process-timeline {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-xl);
+  }
+
+  .step-line {
+    width: 2px;
+    height: 24px;
+    left: 50%;
+    top: 48px;
+    transform: translateX(-50%);
+  }
+
+  .step-content {
+    margin-top: var(--spacing-sm);
+  }
+}
+</style>
