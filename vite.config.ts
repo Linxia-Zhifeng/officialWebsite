@@ -12,6 +12,8 @@ export default defineConfig({
     }
   },
   build: {
+    //原来dist改成docs
+    outDir: 'docs',
     // 现代浏览器目标：跳过无谓的语法降级，产物更小
     target: 'es2020',
     // 单 chunk 超过 1000KB 才警告
